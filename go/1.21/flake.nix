@@ -29,6 +29,14 @@
 
         # For compatibility with older versions of the `nix` binary
         devShell = self.devShells.${system}.default;
+
+        templates.default = {
+          path = ./.;
+          description = "Go 1.21";
+          welcomeText = ''
+            Go 1.21 dev env setup from [flakez](https://github.com/aruZeta/flakez)
+          '';
+        };
       }
     );
 }

@@ -2,18 +2,22 @@
   description = "flakez - Go 1.21"; # 1.21.1 to be exact
 
   inputs = {
+    # Set this to the actual nixpkgs you are going to use
     nixpkgs.url = "github:NixOS/nixpkgs/e67b7b6ab5e1c8055597d5c02ad6d3c489f0f134";
+
+    goPkgs.url = "github:NixOS/nixpkgs/e67b7b6ab5e1c8055597d5c02ad6d3c489f0f134";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
     { self
     , nixpkgs
+    , goPkgs
     , flake-utils
     } @ inputs: flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        go = pkgs.go_1_21;
+        go = goPkgs.legacyPackages.${system}.go_1_21;
       in {
         defaultPackage = go;
 

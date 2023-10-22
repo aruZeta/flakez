@@ -69,5 +69,7 @@
         # For compatibility with older versions of the `nix` binary
         devShell = self.devShells.${system}.default;
       }
-    );
+    ) // {
+      templates = import ./templates.nix {};
+    };
 }

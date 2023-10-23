@@ -3,10 +3,10 @@
 
 let
   utils = {
-    paramsAsPath = ''
+    joinParams = sep: ''
       IFS_BAK="$IFS"
-      IFS='/'
-      FLAKEZ_PATH="$*"
+      IFS='${sep}'
+      FLAKEZ_PARAMS="$*"
       IFS="$IFS_BAK"
     '';
   };
@@ -16,8 +16,8 @@ in
   { name = "use";
     scriptName = "flakez-use";
     script = ''
-      ${utils.paramsAsPath}
-      echo "use flake \"${repo}?dir=$FLAKEZ_PATH\"" >> .envrc
+      ${utils.joinParams "/"}
+      echo "use flake \"${repo}?dir=$FLAKEZ_PARAMS\"" >> .envrc
       direnv allow
     '';
   }
@@ -25,8 +25,8 @@ in
   { name = "init";
     scriptName = "flakez-init";
     script = ''
-      ${utils.paramsAsPath}
-      nix flake init -t "${repo}?dir=$FLAKEZ_PATH"
+      ${utils.joinParams "_"}
+      nix flake init --debug -v -t "${repo}#\"$FLAKEZ_PARAMS\""
       direnv allow
     '';
   }

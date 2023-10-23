@@ -26,7 +26,7 @@ in
     scriptName = "flakez-init";
     script = ''
       ${utils.joinParams "_"}
-      nix flake init --debug -v -t "${repo}#\"$FLAKEZ_PARAMS\""
+      nix flake init -t "${repo}#\"$FLAKEZ_PARAMS\""
       direnv allow
     '';
   }

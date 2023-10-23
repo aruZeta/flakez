@@ -43,7 +43,6 @@
             in pkgs.writeShellScriptBin "flakez" ''
               CMD=$1
               shift
-              echo $CMD
               ${(foldl' (acc: curr: acc + (toCommand curr)) ''
                 if [ -z "$CMD" ]; then
                   echo "No command passed" >&2

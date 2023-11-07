@@ -29,6 +29,9 @@
           shellHook = ''
             ${maven}/bin/mvn --version
           '';
+
+          M2 = "${maven}/maven/bin";
+          M2_HOME = "${maven}/maven";
         };
 
         # For compatibility with older versions of the `nix` binary
